@@ -1,14 +1,16 @@
 import os
+import sys
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 from homography_utils import load, compute_homography, apply_homography
 
-tgt_path = "target-2.png"
+tgt_path = sys.argv[1] if len(sys.argv) > 1 else "target-2.png"
+fig_dir = os.path.join("src", "step1")
 os.makedirs("points", exist_ok=True)
-os.makedirs("src", exist_ok=True)
+os.makedirs(fig_dir, exist_ok=True)
 pts_path = os.path.join("points", tgt_path.replace(".png", "_pts.npz"))
-fig_path = os.path.join("src", tgt_path.replace(".png", "_step1.png"))
+fig_path = os.path.join(fig_dir, tgt_path.replace(".png", "_step1.png"))
 saved =np.load(pts_path) if os.path.exists(pts_path) else None
 
 src = load("source.png")

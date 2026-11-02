@@ -12,6 +12,7 @@ DETECTORS = {
 RATIO = 0.75
 INLIER_PX = 3.0
 ITERS = 2000
+FIG_DIR = os.path.join("src", "step2")
 
 def match_features(detector, norm, img1, img2):
     gray1 = cv2.cvtColor(img1, cv2.COLOR_RGB2GRAY)
@@ -51,10 +52,10 @@ def save_figure(src, tgt, kp1, kp2, good, inliers, H, name):
     ax2.imshow(overlay)
     ax2.set_title("Warped source over target")
     plt.tight_layout()
-    plt.savefig(os.path.join("src", name))
+    plt.savefig(os.path.join(FIG_DIR, name))
     plt.close(fig)
 
-os.makedirs("src", exist_ok=True)
+os.makedirs(FIG_DIR, exist_ok=True)
 rng = np.random.default_rng(0)
 src = load("source.png")
 h, w = src.shape[:2]
